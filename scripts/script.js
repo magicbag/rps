@@ -11,6 +11,9 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    playerSelection = playerSelection.replace(playerSelection[0], playerSelection[0].toUpperCase());
+    
     if (playerSelection == "Rock") {
         if (computerSelection == "Rock") {
             return tieRound;
@@ -18,7 +21,7 @@ function playRound(playerSelection, computerSelection) {
         else if (computerSelection == "Paper") {
             return lostRound + " " + rockPaper;
         }
-        else {
+        else {if (computerSelection == "Scissors")
             return wonRound + " " + rockScissors;
         }
     }
