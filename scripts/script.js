@@ -21,8 +21,8 @@ function playRound(e) {
         return;
     }
 
-    if (playerSelection == "Rock") {
-        if (computerSelection == "Paper") {
+    if (playerSelection === "Rock") {
+        if (computerSelection === "Paper") {
             losses++;
         }
         else {
@@ -30,8 +30,8 @@ function playRound(e) {
         }
     }
 
-    else if (playerSelection == "Paper") {
-        if (computerSelection == "Rock") {
+    else if (playerSelection === "Paper") {
+        if (computerSelection === "Rock") {
             wins++;
         }
         else {
@@ -39,11 +39,11 @@ function playRound(e) {
         }
     }
 
-    else if (playerSelection == "Scissors") {
-        if (computerSelection == "Rock") {
+    else if (playerSelection === "Scissors") {
+        if (computerSelection === "Rock") {
             losses++;
         }
-        if (computerSelection == "Paper") {
+        if (computerSelection === "Paper") {
             wins++;
         }
     }
