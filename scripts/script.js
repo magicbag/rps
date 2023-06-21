@@ -3,11 +3,11 @@ function getComputerChoice() {
         return choice[Math.floor(Math.random() * 3)];
 }
 
-function getUserSelection() {
-    return prompt("Enter a choice: Rock, paper or scissors: ");
+function getUserSelection(event) {
+    console.log(event.target);
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(e) {
     const wonRound = "You win!";
     const lostRound = "You lose!";
     const tieRound = "You tied. Both made same choice!";
@@ -15,8 +15,8 @@ function playRound(playerSelection, computerSelection) {
     const rockScissors = "Rock crushes scissors.";
     const paperScissors = "Scissors cut paper.";
 
-    playerSelection = playerSelection.toLowerCase();
-    playerSelection = playerSelection.replace(playerSelection[0], playerSelection[0].toUpperCase());
+    computerSelection = getComputerChoice();
+    playerSelection = e.target.textContent;
     
     if (playerSelection === computerSelection) {
         return tieRound;
@@ -50,7 +50,16 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+const btn = document.querySelectorAll('.btn');
+console.log(btn);
+btn.forEach(elem => {
+    elem.addEventListener('click', playRound);
+});
+
 function game() {
+
+    let res = playRound(getUserSelection(), getComputerSelection());
+    console.log(res);
     let wins = 0, losses = 0;
     for (let i = 0; i < 5; i++) {
         let result = playRound(getUserSelection(), getComputerChoice());
