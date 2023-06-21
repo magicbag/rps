@@ -1,10 +1,9 @@
+let wins = 0;
+let losses = 0;
+
 function getComputerChoice() {
         const choice = ["Rock", "Paper", "Scissors"];
         return choice[Math.floor(Math.random() * 3)];
-}
-
-function getUserSelection(event) {
-    console.log(event.target);
 }
 
 function playRound(e) {
@@ -17,59 +16,50 @@ function playRound(e) {
 
     computerSelection = getComputerChoice();
     playerSelection = e.target.textContent;
-    
+
     if (playerSelection === computerSelection) {
-        return tieRound;
+        return;
     }
 
     if (playerSelection == "Rock") {
         if (computerSelection == "Paper") {
-            return lostRound + " " + rockPaper;
+            losses++;
         }
         else {
-            return wonRound + " " + rockScissors;
+            wins++;
         }
     }
 
     else if (playerSelection == "Paper") {
         if (computerSelection == "Rock") {
-            return wonRound + " " + rockPaper;
+            wins++;
         }
         else {
-            return lostRound + " " + paperScissors;
+            losses++;
         }
     }
 
     else if (playerSelection == "Scissors") {
         if (computerSelection == "Rock") {
-            return lostRound + " " + rockScissors;
+            losses++;
         }
         if (computerSelection == "Paper") {
-            return wonRound + " " + paperScissors;
+            wins++;
         }
+    }
+    
+    const results = document.querySelector('.results');
+    results.textContent = `Wins: ${wins}, Losses: ${losses}`;
+
+    if (wins === 5) {
+        results.textContent = 'And the winner is you!';
+    }
+    if (losses === 5) {
+        results.textContent = 'And the winner is the computer!';
     }
 }
 
 const btn = document.querySelectorAll('.btn');
-console.log(btn);
 btn.forEach(elem => {
     elem.addEventListener('click', playRound);
 });
-
-function game() {
-
-    let res = playRound(getUserSelection(), getComputerSelection());
-    console.log(res);
-    let wins = 0, losses = 0;
-    for (let i = 0; i < 5; i++) {
-        let result = playRound(getUserSelection(), getComputerChoice());
-        if (result.includes("win")) {
-            wins++;
-        }
-        else if (result.includes("lose")) {
-            losses++;
-        }
-        console.log(result);
-    }
-    console.log(`Final score (wins-losses-ties): ${wins}-${losses}-` + (5 - wins - losses));
-}
